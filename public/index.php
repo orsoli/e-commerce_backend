@@ -1,8 +1,9 @@
 <?php
 
-  require 'vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-  $dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__);
-  $dotenv->safeLoad();
+use App\Config\Config; // Import Config class
 
-  echo "Hello {$_SERVER['HELLO']}";
+$config = new Config(); // Load environment variables
+
+echo $config->get('DB_HOST'); // Output: localhost
