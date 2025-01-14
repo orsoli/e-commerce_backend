@@ -1,0 +1,45 @@
+services:
+  # Apache and PHP service
+  web:
+    image: php:8.2-apache
+    container_name: apache-container-php
+    ports:
+      - "8089:80"
+    volumes:
+      - .:/var/www/html
+      - ./apache-conf/apache2.conf:/etc/apache2/apache2.conf
+
+
+  # MySQL service
+  mysql:
+    image: mysql:8.0
+    networks:
+      - my-network
+    container_name: eCommerce-mysql-container
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: your_database
+      MYSQL_USER: your_user
+      MYSQL_PASSWORD: your_password
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+  # phpMyAdmin service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - my-network
+    container_name: myadmin-container-php
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root_password
+    depends_on:
+      - mysql
+
+# Define networks
+networks:
+  my-network:
