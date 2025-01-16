@@ -14,7 +14,7 @@ class CreateProductsTable {
      */
     public function up() {
         // Create the products table
-        $db = new Database($_ENV['DB_HOST'],$_ENV['DB_PORT'], $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'],$_ENV['DB_PASSWORD']);
+        $db = new Database();
         $conn = $db->getConnection();
 
         // Check if the table already exists
