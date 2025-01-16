@@ -8,6 +8,7 @@ services:
     volumes:
       - .:/var/www/html
       - ./apache-conf/apache2.conf:/etc/apache2/apache2.conf
+      - ./apache-conf/000-default.conf:/etc/apache2/sites-available/000-default.conf
 
 
   # MySQL service

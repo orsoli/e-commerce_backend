@@ -1,5 +1,5 @@
 {
-  "name": "scandiweb/e-commerce_backend",
+  "name": "scandiweb/fullstack",
   "description": "Test task for backend development",
   "require": {
     "dotenv-org/phpdotenv-vault": "^0.2.4"
