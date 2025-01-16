@@ -30,14 +30,14 @@ class CreateProductsTable {
             id VARCHAR(255) NOT NULL PRIMARY KEY,
             name VARCHAR(255) NOT NULL UNIQUE KEY,
             inStock BOOLEAN NOT NULL,
-            description TEXT NULLABLE,
+            description TEXT DEFAULT NULL,
             price DECIMAL(8,2) UNSIGNED,
             category VARCHAR(255),
             brand VARCHAR(255),
             __typename VARCHAR(255),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY (price) REFERENCES prices(amount),
             FOREIGN KEY (category) REFERENCES categories(name)
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $conn->exec($sql);
         echo " - Table products created successfully          \033[32mDONE\033[0m\n";

@@ -27,7 +27,7 @@ class CreatePricesTable {
         }
         // Create the table
         $sql = "CREATE TABLE prices (
-            name VARCHAR(255) NOT NULL PRIMARY KEY,
+            amount DECIMAL(8,2) UNSIGNED PRIMARY KEY,
             __typename VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";

@@ -28,7 +28,7 @@ class CreatAttributesTable {
         // Create the table
         $sql = "CREATE TABLE attributes (
             id VARCHAR(255) NOT NULL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL UNIQUE KEY,
             type VARCHAR(255) NOT NULL,
             __typename VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
