@@ -18,9 +18,13 @@ class Database {
             $this->conn = new PDO("mysql:host=$host;port=$port;dbname=$name", $user, $password);
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connected successfully       <p class='success'>Done</p> \n";
-            } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            
+            echo "\033[32m - DB Connected successfully\033[0m\n";
+            
+        } catch(PDOException $e) {
+
+            echo "\033[31m - DB Connection failed: \033[0m\n" . $e->getMessage();
+
             }
     }
 

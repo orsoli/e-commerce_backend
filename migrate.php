@@ -8,8 +8,8 @@ try {
     // Run the up method
     $migration->up();
 
-    echo "All migrations were executed successfully!\n";
+    echo "\033[32m - All migrations were executed successfully!\033[0m\n";
     
 }catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+    echo "\033[31m - Connection failed: \033[0m\n" . $e->getMessage();
 }

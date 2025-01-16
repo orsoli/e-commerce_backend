@@ -22,7 +22,7 @@ class CreateCategoriesTable {
         $result = $conn->query($sql);
         // Check if result is not empty
         if($result->rowCount() > 0) {
-            echo "Table categories already exists     <p class='success'>Done</p> \n";
+            echo "\033[33m - Table categories already exists\033[0m\n";
             return;
         }
         // Create the table
@@ -32,7 +32,7 @@ class CreateCategoriesTable {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $conn->exec($sql);
-        echo "Table categories created successfully     <p class='success'>Done</p> \n";
+        echo " - Table categories created successfully          \033[32mDONE\033[0m\n";
     }
 
     /**
@@ -44,7 +44,7 @@ class CreateCategoriesTable {
         $conn = $db->getConnection();
         $sql = "DROP TABLE categories";
         $conn->exec($sql);
-        echo "Table categories dropped successfully \n";
+        echo "Table categories dropped successfully         \033[31mDONE\033[0m\n";
     }
 }
 ?>
