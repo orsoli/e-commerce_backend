@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/Migrations/20250115_create_categories_table.php';
+require_once __DIR__ . '/Migrations/20250115_01_create_categories_table.php';
 
 
 try {

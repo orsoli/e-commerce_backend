@@ -7,32 +7,32 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-class CreateCategoriesTable {
+class CreatePricesTable {
     
     /**
      * Run the migrations
      */
     public function up() {
-        // Create the categories table
-        $db = new Database($_ENV['DB_HOST'],$_ENV['DB_PORT'], $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'],$_ENV['DB_PASSWORD']);
+        // Create the prices table
+        $db = new Database();
         $conn = $db->getConnection();
 
         // Check if the table already exists
-        $sql = "SHOW TABLES LIKE 'categories'";
+        $sql = "SHOW TABLES LIKE 'prices'";
         $result = $conn->query($sql);
         // Check if result is not empty
         if($result->rowCount() > 0) {
-            echo "\033[33m - Table categories already exists\033[0m\n";
+            echo "\033[33m - prices table already exists\033[0m\n";
             return;
         }
         // Create the table
-        $sql = "CREATE TABLE categories (
+        $sql = "CREATE TABLE prices (
             name VARCHAR(255) NOT NULL PRIMARY KEY,
             __typename VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $conn->exec($sql);
-        echo " - Table categories created successfully          \033[32mDONE\033[0m\n";
+        echo " - Table prices created successfully          \033[32mDONE\033[0m\n";
     }
 
     /**
@@ -42,9 +42,9 @@ class CreateCategoriesTable {
                 
         $db = new Database($_ENV['DB_HOST'],$_ENV['DB_PORT'], $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'],$_ENV['DB_PASSWORD']);
         $conn = $db->getConnection();
-        $sql = "DROP TABLE categories";
+        $sql = "DROP TABLE prices";
         $conn->exec($sql);
-        echo "Table categories dropped successfully         \033[31mDONE\033[0m\n";
+        echo "Table prices dropped successfully         \033[31mDONE\033[0m\n";
     }
 }
 ?>
