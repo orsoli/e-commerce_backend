@@ -1,6 +1,11 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Database\Database;
+use Dotenv\Dotenv;
+// Load environment variables
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 class CreateCategoriesTable {
     
@@ -9,14 +14,13 @@ class CreateCategoriesTable {
      */
     public function up() {
         // Create the categories table
-        $db = new Database('127.0.0.1','3309', 'eCommerce_db', 'root','root_password');
-        // $db = new Database($_ENV['DB_HOST'], $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'],$_ENV['DB_PASSWORD']);
+        $db = new Database($_ENV['DB_HOST'],$_ENV['DB_PORT'], $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'],$_ENV['DB_PASSWORD']);
         $conn = $db->getConnection();
 
         // Check if the table already exists
         $sql = "SHOW TABLES LIKE 'categories'";
         $result = $conn->query($sql);
-        // Ccheck if result is not empty
+        // Check if result is not empty
         if($result->rowCount() > 0) {
             echo "Table categories already exists     <p class='success'>Done</p> \n";
             return;

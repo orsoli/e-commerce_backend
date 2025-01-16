@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91837fb54a0e36cb358b68d51debfbf9",
+    "content-hash": "021ab0410c5c7cd0955bcc872b4316e9",
     "packages": [
         {
             "name": "dotenv-org/phpdotenv-vault",

@@ -2,7 +2,8 @@
   "name": "scandiweb/fullstack",
   "description": "Test task for backend development",
   "require": {
-    "dotenv-org/phpdotenv-vault": "^0.2.4"
+    "dotenv-org/phpdotenv-vault": "^0.2.4",
+    "vlucas/phpdotenv": "^5.6"
   },
   "autoload": {
     "psr-4": {
