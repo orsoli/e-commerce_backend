@@ -17,16 +17,8 @@ class CreateGalleryTable {
      */
     public function up() {
 
-        // Check if the table already exists
-        $sql = "SHOW TABLES LIKE 'gallery'";
-        $result = $this->conn->query($sql);
-        // Check if result is not empty
-        if($result->rowCount() > 0) {
-            echo "\033[33m ! - gallery table already exists\033[0m\n";
-            return;
-        }
         // Create the table
-        $sql = "CREATE TABLE gallery (
+        $sql = "CREATE TABLE IF NOT EXISTS gallery (
             id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
             product_id VARCHAR(255) NOT NULL,
             url TEXT NOT NULL,
@@ -42,17 +34,9 @@ class CreateGalleryTable {
      * Reverse the migrations
      */
     public function down() {
-
-        // Check if the table does not exist
-        $sql = "SHOW TABLES LIKE 'gallery'";
-        $result = $this->conn->query($sql);
-        // Check if result is empty
-        if($result->rowCount() == 0) {
-            echo "\033[33m ! - gallery table does not exist\033[0m\n";
-            return;
-        }
-
-        $sql = "DROP TABLE gallery";
+        
+        // Drop the table
+        $sql = "DROP TABLE IF EXISTS gallery";
         $this->conn->exec($sql);
         echo "\033[32m \u{2714} DONE\033[0m       - Table gallery dropped successfully.\n";
     }

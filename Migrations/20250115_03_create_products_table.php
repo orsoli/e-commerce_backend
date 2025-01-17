@@ -16,17 +16,8 @@ class CreateProductsTable {
      * Run the migrations
      */
     public function up() {
-
-        // Check if the table already exists
-        $sql = "SHOW TABLES LIKE 'products'";
-        $result = $this->conn->query($sql);
-        // Check if result is not empty
-        if($result->rowCount() > 0) {
-            echo "\033[33m ! - products table already exists\033[0m\n";
-            return;
-        }
         // Create the table
-        $sql = "CREATE TABLE products (
+        $sql = "CREATE TABLE IF NOT EXISTS products (
             id VARCHAR(255) NOT NULL PRIMARY KEY,
             name VARCHAR(255) NOT NULL UNIQUE KEY,
             inStock BOOLEAN NOT NULL,
@@ -47,17 +38,9 @@ class CreateProductsTable {
      * Reverse the migrations
      */
     public function down() {
-
-        // Check if the table does not exist
-        $sql = "SHOW TABLES LIKE 'products'";
-        $result = $this->conn->query($sql);
-        // Check if result is empty
-        if($result->rowCount() == 0) {
-            echo "\033[33m ! - products table does not exist\033[0m\n";
-            return;
-        }
-
-        $sql = "DROP TABLE products";
+        
+        // Drop the table
+        $sql = "DROP TABLE IF EXISTS products";
         $this->conn->exec($sql);
         echo "\033[32m \u{2714} DONE\033[0m       - Table products dropped successfully.\n";
     }

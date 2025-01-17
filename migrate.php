@@ -25,16 +25,16 @@ $connection = $db->getConnection();
 try {
     // Import the tables classes
     $migrations = [
-                 new CreateCategoriesTable($connection),
-                 new CreatePricesTable($connection),
-                 new CreateProductsTable($connection),
-                 new CreatAttributesTable($connection),
-                 new CreateAttributeProductTable($connection),
-                 new CreateGalleryTable($connection), 
-                 new CreateCurrencyTable($connection),
-                 new CreateCurrencyPriceTable($connection),
-                 new CreateItemsTable($connection)                
-                 ];
+        new CreateCategoriesTable($connection),
+        new CreatePricesTable($connection),
+        new CreateProductsTable($connection),
+        new CreatAttributesTable($connection),
+        new CreateAttributeProductTable($connection),
+        new CreateGalleryTable($connection), 
+        new CreateCurrencyTable($connection),
+        new CreateCurrencyPriceTable($connection),
+        new CreateItemsTable($connection)                
+    ];
     // Run the up method for each migration
     foreach($migrations as $migration)
         // Run the up method

@@ -18,16 +18,8 @@ class CreatAttributesTable {
      */
     public function up() {
 
-        // Check if the table already exists
-        $sql = "SHOW TABLES LIKE 'attributes'";
-        $result = $this->conn->query($sql);
-        // Check if result is not empty
-        if($result->rowCount() > 0) {
-            echo "\033[33m ! - attributes table already exists\033[0m\n";
-            return;
-        }
         // Create the table
-        $sql = "CREATE TABLE attributes (
+        $sql = "CREATE TABLE IF NOT EXISTS attributes (
             id VARCHAR(255) NOT NULL PRIMARY KEY,
             name VARCHAR(255) NOT NULL UNIQUE KEY,
             type VARCHAR(255) NOT NULL,
@@ -43,16 +35,8 @@ class CreatAttributesTable {
      */
     public function down() {
 
-        // Check if the table does not exist
-        $sql = "SHOW TABLES LIKE 'attributes'";
-        $result = $this->conn->query($sql);
-        // Check if result is empty
-        if($result->rowCount() == 0) {
-            echo "\033[33m ! - attributes table does not exist\033[0m\n";
-            return;
-        }
-
-        $sql = "DROP TABLE attributes";
+        // Drop the table
+        $sql = "DROP TABLE IF EXISTS attributes";
         $this->conn->exec($sql);
         echo "\033[32m \u{2714} DONE\033[0m       - Table attributes dropped successfully.\n";
     }

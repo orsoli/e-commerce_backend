@@ -16,17 +16,9 @@ class CreateItemsTable {
      * Run the migrations
      */
     public function up() {
-
-        // Check if the table already exists
-        $sql = "SHOW TABLES LIKE 'items'";
-        $result = $this->conn->query($sql);
-        // Check if result is not empty
-        if($result->rowCount() > 0) {
-            echo "\033[33m ! - items table already exists\033[0m\n";
-            return;
-        }
+        
         // Create the table
-        $sql = "CREATE TABLE items (
+        $sql = "CREATE TABLE IF NOT EXISTS items (
             id VARCHAR(255) NOT NULL PRIMARY KEY,
             attribute_id VARCHAR(255) NOT NULL,
             display_value VARCHAR(255) NOT NULL,
@@ -43,17 +35,9 @@ class CreateItemsTable {
      * Reverse the migrations
      */
     public function down() {
-
-        // Check if the table does not exist
-        $sql = "SHOW TABLES LIKE 'items'";
-        $result = $this->conn->query($sql);
-        // Check if result is empty
-        if($result->rowCount() == 0) {
-            echo "\033[33m ! - items table does not exist\033[0m\n";
-            return;
-        }
-
-        $sql = "DROP TABLE items";
+        
+        // Drop the table
+        $sql = "DROP TABLE IF EXISTS items";
         $this->conn->exec($sql);
         echo "\033[32m \u{2714} DONE\033[0m       - Table items dropped successfully.\n";
     }

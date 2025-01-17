@@ -15,18 +15,9 @@ class CreateCategoriesTable {
      * Run the migrations
      */
     public function up() {
-        
-        // Check if the table already exists
-        $sql = "SHOW TABLES LIKE 'categories'";
-        $result = $this->conn->query($sql);
-        // Check if result is not empty
-        if($result->rowCount() > 0) {
-            echo "\033[33m ! - categories table already exists\033[0m\n";
-            return;
-        }
 
         // Create the categories table
-        $sql = "CREATE TABLE categories (
+        $sql = "CREATE TABLE IF NOT EXISTS categories (
             name VARCHAR(255) NOT NULL PRIMARY KEY,
             __typename VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -39,17 +30,8 @@ class CreateCategoriesTable {
      * Reverse the migrations
      */
     public function down() {
-
-        // Check if the table does not exist
-        $sql = "SHOW TABLES LIKE 'categories'";
-        $result = $this->conn->query($sql);
-        // Check if result is empty
-        if($result->rowCount() == 0) {
-            echo "\033[33m ! - categories table does not exist\033[0m\n";
-            return;
-        }
-
-        $sql = "DROP TABLE categories";
+        // Drop the categories table
+        $sql = "DROP TABLE IF EXISTS categories";
         $this->conn->exec($sql);
         echo "\033[32m \u{2714} DONE\033[0m       - Table categories dropped successfully.\n";
     }

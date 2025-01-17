@@ -17,16 +17,8 @@ class CreateAttributeProductTable {
      */
     public function up() {
 
-        // Check if the table already exists
-        $sql = "SHOW TABLES LIKE 'attribute_product'";
-        $result = $this->conn->query($sql);
-        // Check if result is not empty
-        if($result->rowCount() > 0) {
-            echo "\033[33m ! - attribute_product table already exists\033[0m\n";
-            return;
-        }
         // Create the table with foreign keys
-        $sql = "CREATE TABLE attribute_product (
+        $sql = "CREATE TABLE IF NOT EXISTS attribute_product (
             id BIGINT NOT NULL PRIMARY KEY,
             product_id VARCHAR(255) NOT NULL,
             attribute_id VARCHAR(255) NOT NULL,
@@ -44,16 +36,8 @@ class CreateAttributeProductTable {
      */
     public function down() {
 
-        // Check if the table does not exist
-        $sql = "SHOW TABLES LIKE 'attribute_product'";
-        $result = $this->conn->query($sql);
-        // Check if result is empty
-        if($result->rowCount() == 0) {
-            echo "\033[33m ! - attribute_product table does not exist\033[0m\n";
-            return;
-        }
-
-        $sql = "DROP TABLE attribute_product";
+        // Drop the table
+        $sql = "DROP TABLE IF EXISTS attribute_product";
         $this->conn->exec($sql);
         echo "\033[32m \u{2714} DONE\033[0m       - Table attribute_product dropped successfully.\n";
     }
