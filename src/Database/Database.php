@@ -29,11 +29,11 @@ class Database {
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-            echo "\033[32m - DB Connected successfully\033[0m\n";
+            echo "\033[32m \u{2714} DB Connected successfully\033[0m\n";
             
         } catch(PDOException $e) {
 
-            echo "\033[31m - DB Connection failed: \033[0m\n" . $e->getMessage();
+            echo "\033[31m X DB Connection failed: {$e->getMessage()}\033[0m\n";
 
             }
     }

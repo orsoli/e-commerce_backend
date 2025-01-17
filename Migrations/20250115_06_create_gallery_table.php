@@ -22,7 +22,7 @@ class CreateGalleryTable {
         $result = $this->conn->query($sql);
         // Check if result is not empty
         if($result->rowCount() > 0) {
-            echo "\033[33m - gallery table already exists\033[0m\n";
+            echo "\033[33m ! - gallery table already exists\033[0m\n";
             return;
         }
         // Create the table
@@ -35,16 +35,25 @@ class CreateGalleryTable {
             FOREIGN KEY (product_id) REFERENCES products(id)
         )";
         $this->conn->exec($sql);
-        echo " - Table gallery created successfully          \033[32mDONE\033[0m\n";
+        echo "\033[32m \u{2714} DONE\033[0m       - Table gallery created successfully.\n";
     }
 
     /**
      * Reverse the migrations
      */
     public function down() {
-        
+
+        // Check if the table does not exist
+        $sql = "SHOW TABLES LIKE 'gallery'";
+        $result = $this->conn->query($sql);
+        // Check if result is empty
+        if($result->rowCount() == 0) {
+            echo "\033[33m ! - gallery table does not exist\033[0m\n";
+            return;
+        }
+
         $sql = "DROP TABLE gallery";
         $this->conn->exec($sql);
-        echo "Table gallery dropped successfully         \033[31mDONE\033[0m\n";
+        echo "\033[32m \u{2714} DONE\033[0m       - Table gallery dropped successfully.\n";
     }
 }

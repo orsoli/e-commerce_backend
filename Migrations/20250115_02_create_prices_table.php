@@ -21,7 +21,7 @@ class CreatePricesTable {
         $result = $this->conn->query($sql);
         // Check if result is not empty
         if($result->rowCount() > 0) {
-            echo "\033[33m - prices table already exists\033[0m\n";
+            echo "\033[33m ! - prices table already exists\033[0m\n";
             return;
         }
         // Create the table
@@ -31,17 +31,26 @@ class CreatePricesTable {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $this->conn->exec($sql);
-        echo " - Table prices created successfully          \033[32mDONE\033[0m\n";
+         echo "\033[32m \u{2714} DONE\033[0m       - Table prices created successfully.\n";
     }
 
     /**
      * Reverse the migrations
      */
     public function down() {
-        
+
+        // Check if the table does not exist
+        $sql = "SHOW TABLES LIKE 'prices'";
+        $result = $this->conn->query($sql);
+        // Check if result is empty
+        if($result->rowCount() == 0) {
+            echo "\033[33m ! - prices table does not exist\033[0m\n";
+            return;
+        }
+
         $sql = "DROP TABLE prices";
         $this->conn->exec($sql);
-        echo "Table prices dropped successfully         \033[31mDONE\033[0m\n";
+        echo "\033[32m \u{2714} DONE\033[0m       - Table prices dropped successfully.\n";
     }
 }
 ?>

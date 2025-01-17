@@ -22,7 +22,7 @@ class CreateItemsTable {
         $result = $this->conn->query($sql);
         // Check if result is not empty
         if($result->rowCount() > 0) {
-            echo "\033[33m - items table already exists\033[0m\n";
+            echo "\033[33m ! - items table already exists\033[0m\n";
             return;
         }
         // Create the table
@@ -36,16 +36,25 @@ class CreateItemsTable {
             FOREIGN KEY (attribute_id) REFERENCES attributes(id)
         )";
         $this->conn->exec($sql);
-        echo " - Table items created successfully          \033[32mDONE\033[0m\n";
+         echo "\033[32m \u{2714} DONE\033[0m       - Table items created successfully.\n";
     }
 
     /**
      * Reverse the migrations
      */
     public function down() {
-        
+
+        // Check if the table does not exist
+        $sql = "SHOW TABLES LIKE 'items'";
+        $result = $this->conn->query($sql);
+        // Check if result is empty
+        if($result->rowCount() == 0) {
+            echo "\033[33m ! - items table does not exist\033[0m\n";
+            return;
+        }
+
         $sql = "DROP TABLE items";
         $this->conn->exec($sql);
-        echo "Table items dropped successfully         \033[31mDONE\033[0m\n";
+        echo "\033[32m \u{2714} DONE\033[0m       - Table items dropped successfully.\n";
     }
 }

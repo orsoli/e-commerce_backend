@@ -22,7 +22,7 @@ class CreateProductsTable {
         $result = $this->conn->query($sql);
         // Check if result is not empty
         if($result->rowCount() > 0) {
-            echo "\033[33m - products table already exists\033[0m\n";
+            echo "\033[33m ! - products table already exists\033[0m\n";
             return;
         }
         // Create the table
@@ -40,17 +40,26 @@ class CreateProductsTable {
             FOREIGN KEY (category) REFERENCES categories(name)
         )";
         $this->conn->exec($sql);
-        echo " - Table products created successfully          \033[32mDONE\033[0m\n";
+        echo "\033[32m \u{2714} DONE\033[0m       - Table products created successfully.\n";
     }
 
     /**
      * Reverse the migrations
      */
     public function down() {
-        
+
+        // Check if the table does not exist
+        $sql = "SHOW TABLES LIKE 'products'";
+        $result = $this->conn->query($sql);
+        // Check if result is empty
+        if($result->rowCount() == 0) {
+            echo "\033[33m ! - products table does not exist\033[0m\n";
+            return;
+        }
+
         $sql = "DROP TABLE products";
         $this->conn->exec($sql);
-        echo "Table products dropped successfully         \033[31mDONE\033[0m\n";
+        echo "\033[32m \u{2714} DONE\033[0m       - Table products dropped successfully.\n";
     }
 }
 ?>

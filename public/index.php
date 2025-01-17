@@ -9,5 +9,5 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 
-echo $_ENV['DB_HOST'];
+echo '&check;' . $_ENV['DB_HOST'];
 ?>

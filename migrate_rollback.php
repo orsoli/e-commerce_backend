@@ -25,20 +25,20 @@ $connection = $db->getConnection();
 try {
     // Import the tables classes
     $migrations = [
-                 new CreateCategoriesTable($connection),
-                 new CreatePricesTable($connection),
-                 new CreateProductsTable($connection),
-                 new CreatAttributesTable($connection),
-                 new CreateAttributeProductTable($connection),
-                 new CreateGalleryTable($connection), 
-                 new CreateCurrencyTable($connection),
-                 new CreateCurrencyPriceTable($connection),
-                 new CreateItemsTable($connection)                
-                 ];
+        new CreateGalleryTable($connection), 
+        new CreateAttributeProductTable($connection),
+        new CreateProductsTable($connection),
+        new CreateCategoriesTable($connection),
+        new CreateItemsTable($connection),                
+        new CreatAttributesTable($connection),
+        new CreateCurrencyPriceTable($connection),
+        new CreatePricesTable($connection),
+        new CreateCurrencyTable($connection),
+    ];
     // Run the up method for each migration
     foreach($migrations as $migration)
         // Run the up method
-        $migration->up();
+        $migration->down();
 
     echo "\033[32m \u{2714} All migrations were executed successfully!\033[0m\n";
     
