@@ -1,25 +1,25 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
-
-use App\Database\Database;
-use Dotenv\Dotenv;
-// Load environment variables
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
-
 class CreateProductsTable {
+
+     private $conn;
+
+    
+    /**
+     * 
+     * @param $conn
+     */
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
     
     /**
      * Run the migrations
      */
     public function up() {
-        // Create the products table
-        $db = new Database();
-        $conn = $db->getConnection();
 
         // Check if the table already exists
         $sql = "SHOW TABLES LIKE 'products'";
-        $result = $conn->query($sql);
+        $result = $this->conn->query($sql);
         // Check if result is not empty
         if($result->rowCount() > 0) {
             echo "\033[33m - products table already exists\033[0m\n";
@@ -39,7 +39,7 @@ class CreateProductsTable {
             FOREIGN KEY (price) REFERENCES prices(amount),
             FOREIGN KEY (category) REFERENCES categories(name)
         )";
-        $conn->exec($sql);
+        $this->conn->exec($sql);
         echo " - Table products created successfully          \033[32mDONE\033[0m\n";
     }
 
@@ -47,11 +47,9 @@ class CreateProductsTable {
      * Reverse the migrations
      */
     public function down() {
-                
-        $db = new Database($_ENV['DB_HOST'],$_ENV['DB_PORT'], $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'],$_ENV['DB_PASSWORD']);
-        $conn = $db->getConnection();
+        
         $sql = "DROP TABLE products";
-        $conn->exec($sql);
+        $this->conn->exec($sql);
         echo "Table products dropped successfully         \033[31mDONE\033[0m\n";
     }
 }
