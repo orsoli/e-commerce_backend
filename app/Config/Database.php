@@ -1,31 +1,25 @@
 <?php
 
-namespace App\Database;
+namespace App\Config;
 
+use App\Config\Config;
 use PDO;
 use PDOException;
 
 class Database {
     private ?PDO $conn = null;
-    private $dbconfig;
+    private $config;
 
     /**
      * Database constructor
      */
     public function __construct() {
-        // DB config from .env
-        $this->dbconfig = [
-            'host' => $_ENV['DB_HOST'],
-            'port' => $_ENV['DB_PORT'],
-            'name' => $_ENV['DB_DATABASE'],
-            'user' => $_ENV['DB_USERNAME'],
-            'password' => $_ENV['DB_PASSWORD'],
-        ];
-    
-
+        // Load the database connection
         try {
+            // Load environment variables
+            $this->config = new Config();
             // Create an Instance of PDO with .env values database config
-            $this->conn = new PDO("mysql:host={$this->dbconfig['host']};port={$this->dbconfig['port']};dbname={$this->dbconfig['name']}", $this->dbconfig['user'], $this->dbconfig['password']);
+            $this->conn = new PDO("mysql:host={$this->config->get('DB_HOST')};port={$this->config->get('DB_PORT')};dbname={$this->config->get('DB_DATABASE')}", $this->config->get('DB_USERNAME'), $this->config->get('DB_PASSWORD'));
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             

@@ -2,21 +2,17 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Import the migrations
-require_once __DIR__ . '/Migrations/20250115_01_create_categories_table.php';
-require_once __DIR__ . '/Migrations/20250115_02_create_prices_table.php';
-require_once __DIR__ . '/Migrations/20250115_03_create_products_table.php';
-require_once __DIR__ . '/Migrations/20250115_04_attributes_table.php';
-require_once __DIR__ . '/Migrations/20250115_05_create_attribute_product_table.php';
-require_once __DIR__ . '/Migrations/20250115_06_create_gallery_table.php';
-require_once __DIR__ . '/Migrations/20250115_07_create_currency_table.php';
-require_once __DIR__ . '/Migrations/20250115_08_create_currency_price_table.php';
-require_once __DIR__ . '/Migrations/20250115_09_create_items_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_01_create_categories_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_02_create_prices_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_03_create_products_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_04_attributes_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_05_create_attribute_product_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_06_create_gallery_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_07_create_currency_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_08_create_currency_price_table.php';
+require_once __DIR__ . '/app/Migrations/20250115_09_create_items_table.php';
 
-use App\Database\Database;
-use Dotenv\Dotenv;
-// Load environment variables
-$dotenv = Dotenv::createImmutable(__DIR__ . '/');
-$dotenv->load();
+use App\Config\Database;
 
 // Get the Database connection
 $db = new Database();

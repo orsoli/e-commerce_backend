@@ -13,10 +13,6 @@ require_once __DIR__ . '/Migrations/20250115_08_create_currency_price_table.php'
 require_once __DIR__ . '/Migrations/20250115_09_create_items_table.php';
 
 use App\Database\Database;
-use Dotenv\Dotenv;
-// Load environment variables
-$dotenv = Dotenv::createImmutable(__DIR__ . '/');
-$dotenv->load();
 
 // Get the Database connection
 $db = new Database();
