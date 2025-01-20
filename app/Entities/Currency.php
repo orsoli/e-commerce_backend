@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\Table;
 class Currency
 {
     #[Id]
-    #[Column(type: 'bigint', options: ['unsigned' => true, 'autoincrement'=> true])]
+    #[Column(type: 'bigint', nullable: false, options: ['unsigned' => true])]
     #[GeneratedValue]
     private $id;
 

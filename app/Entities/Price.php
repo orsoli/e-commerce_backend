@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping\Table;
 class Price
 {
     #[Id]
-    #[Column(type: 'decimal', precision: 8, scale: 2, options: ['unsigned' => true, 'primary' => true])]
+    #[Column(type: 'decimal', precision: 8, scale: 2, options: ['unsigned' => true])]
     private $amount;
 
     #[Column(name: '__typename', type: 'string', length: 255, nullable: false)]

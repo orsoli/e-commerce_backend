@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\Table;
 class Product
 {
     #[Id]
-    #[Column(type: 'string', length: 255, nullable: false, options: ['primary' => true])]
+    #[Column(type: 'string', length: 255, nullable: false)]
     private $id;
 
     #[Column(type: 'string', length: 255, unique: true)]

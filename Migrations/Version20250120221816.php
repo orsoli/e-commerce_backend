@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250120180210 extends AbstractMigration
+final class Version20250120221816 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,7 +24,7 @@ final class Version20250120180210 extends AbstractMigration
         $this->addSql('CREATE TABLE attributes (id VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, UNIQUE INDEX UNIQ_319B9E705E237E06 (name), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE categories (name VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(name))');
         $this->addSql('CREATE TABLE currency (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, label VARCHAR(255) NOT NULL, symbol VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE currency_price (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, price NUMERIC(8, 2) UNSIGNED NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, currency_id BIGINT UNSIGNED AUTO_INCREMENT DEFAULT NULL, INDEX IDX_9D2A20BF38248176 (currency_id), PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE currency_price (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, price NUMERIC(8, 2) UNSIGNED NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, currency_id BIGINT UNSIGNED DEFAULT NULL, INDEX IDX_9D2A20BF38248176 (currency_id), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE gallery (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, url LONGTEXT NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, product_id VARCHAR(255) NOT NULL, INDEX IDX_472B783A4584665A (product_id), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE items (id VARCHAR(255) NOT NULL, displayValue VARCHAR(255) NOT NULL, value VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, attribute_id VARCHAR(255) DEFAULT NULL, INDEX IDX_E11EE94DB6E62EFA (attribute_id), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE prices (amount NUMERIC(8, 2) UNSIGNED NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(amount))');

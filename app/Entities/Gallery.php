@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping\Table;
 class Gallery
 {
     #[Id]
-    #[Column(type: 'bigint', options: ['unsigned' => true, 'primary'=>true, 'autoincrement'=>true])]
+    #[Column(type: 'bigint', options: ['unsigned' => true, 'primary'=>true])]
     #[GeneratedValue]
     private $id;
 
@@ -29,7 +29,7 @@ class Gallery
     #[Column(name: '__typename', type: 'string', length: 255)]
     private $typeName;
 
-    #[Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP', 'onUpdate' => 'CURRENT_TIMESTAMP'], nullable: false)]
+    #[Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'], nullable: false)]
     private $createdAt;
 
     public function setId(int $id): void

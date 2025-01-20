@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\Table;
 class Item
 {
     #[Id]
-    #[Column(type: 'string', length: 255, options: ['primary'=>true])]
+    #[Column(type: 'string', length: 255)]
     private $id;
 
     #[ManyToOne(targetEntity: 'Attribute')]

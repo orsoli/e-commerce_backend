@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\Table;
 class AttributeProduct
 {
     #[Id]
-    #[Column(type: 'bigint', nullable: false, options: ['unsigned'=>true, 'primary'=>true])]
+    #[Column(type: 'bigint', nullable: false, options: ['unsigned'=>true])]
     private $id;
 
     #[ManyToOne(targetEntity: 'Product')]

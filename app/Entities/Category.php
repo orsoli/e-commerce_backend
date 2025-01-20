@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping\Table;
 class Category
 {
     #[Id]
-    #[Column(type: 'string', length: 255, nullable: false, options: ['primary' => true])]
+    #[Column(type: 'string', length: 255, nullable: false)]
     private $name;
 
     #[Column(name: '__typename', type: 'string', length: 255)]
