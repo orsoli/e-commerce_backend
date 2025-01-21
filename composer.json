@@ -14,5 +14,9 @@
     "psr-4": {
       "App\\": "app/"
     }
-  }
+  },
+
+  "scripts": {
+        "doctrine:migrate": "php vendor/bin/doctrine-migrations migrate"
+    }
 }
