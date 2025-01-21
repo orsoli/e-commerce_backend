@@ -1,13 +1,14 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../helper/ApiDataLoader.php';
+
+use App\Helper\ApiDataLoader;
+
+$data = ApiDataLoader::fetchDataFromApi();
 
 
-use Dotenv\Dotenv;
+    echo '<pre>';
+    print_r($data);
+    echo '</pre>';
 
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
-
-
-echo '&check;' . $_ENV['DB_HOST'];
 ?>

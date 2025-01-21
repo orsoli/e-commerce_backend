@@ -17,6 +17,7 @@
   },
 
   "scripts": {
-        "doctrine:migrate": "php vendor/bin/doctrine-migrations migrate"
+        "doctrine:migrate": "php vendor/bin/doctrine-migrations migrate",
+        "doctrine:migrations-diff": "php vendor/bin/doctrine-migrations migrations:diff"
     }
 }
