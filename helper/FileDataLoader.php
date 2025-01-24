@@ -16,6 +16,7 @@ class FileDataLoader
         return $data['data'];
     }
 
+    // Get categories
     public static function getCategories(){
         
         $data = Self::fetchDataFromFile();
@@ -28,5 +29,10 @@ class FileDataLoader
         }
 
         return [];
+    }
+
+    public static function getPrice(){
+
+
     }
 }

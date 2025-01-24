@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../helper/FileDataLoader.php';
 
-use App\Helper\FileDataLoader;
+use Helper\FileDataLoader;
 
 $data = FileDataLoader::getCategories();
 

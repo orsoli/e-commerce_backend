@@ -6,10 +6,11 @@ require_once __DIR__ .'/../../vendor/autoload.php';
 
 use App\Entities\Category;
 use DateTime;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Helper\FileDataLoader;
 
-class CategorySeeder
+class CategorySeeder implements FixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
