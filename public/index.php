@@ -1,14 +1,19 @@
 <?php
-require_once __DIR__ . '/../helper/ApiDataLoader.php';
+require_once __DIR__ . '/../helper/FileDataLoader.php';
 
-use App\Helper\ApiDataLoader;
+use App\Helper\FileDataLoader;
 
-$data = ApiDataLoader::fetchDataFromApi();
+$data = FileDataLoader::getCategories();
 
+    if (count($data) == 0) {
+        echo "Categories do not exist";
+    } else {
+        foreach ($data as $item) {
+            # code...
+            echo $item['name'] . '<br>', $item['__typename'] . '<br>';
+        }
+    }
 
-    echo '<pre>';
-    print_r($data);
-    echo '</pre>';
 
 
 ?>

@@ -12,12 +12,18 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "app/"
+      "Helper\\": "Helper/",
+      "App\\": "app/",
+      "Database\\": "Database/"
     }
   },
 
   "scripts": {
         "doctrine:migrate": "php vendor/bin/doctrine-migrations migrate",
-        "doctrine:migrations-diff": "php vendor/bin/doctrine-migrations migrations:diff"
-    }
+        "doctrine:migrations-diff": "php vendor/bin/doctrine-migrations migrations:diff",
+        "doctrine:db-seed":"php Database/Seeders/DatabaseSeeder.php"
+    },
+  "require-dev": {
+    "doctrine/data-fixtures": "^2.0"
+  }
 }
