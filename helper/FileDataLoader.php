@@ -100,7 +100,7 @@ class FileDataLoader
          // Check if 'Product' exists in the data
          if (count($products) > 0) {
 
-            $attributes = []; // Save prices of profucts
+            $attributes = []; // Store attributes of products
 
             foreach ($products as $product) {
                 foreach ($product['attributes'] as $attribute) {
@@ -112,6 +112,32 @@ class FileDataLoader
             };
             
             return $attributes;
+        }
+
+        return [];
+    }
+
+    // Get items
+    public static function getItems() {
+
+        $attributes = Self::getAttributes();
+
+        // Check if 'attributes' exists
+        if (count($attributes) > 0) {
+            
+            $items = []; // Store items of attributes
+
+            foreach ($attributes as $attribute) {
+                foreach ($attribute['items'] as $singleItem) {
+                    $item = $singleItem; // Get item
+                    $item['attribute_id'] = $attribute['id']; // Get attribute id
+                    if (!in_array($item, $items)) {
+                        $items[] = $item; // Add item in array
+                    }
+                }
+            }
+
+            return $items;
         }
 
         return [];
