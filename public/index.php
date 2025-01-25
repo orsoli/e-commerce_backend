@@ -1,16 +1,20 @@
 <?php
-require_once __DIR__ . '/../helper/FileDataLoader.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Helper\FileDataLoader;
 
-$data = FileDataLoader::getCategories();
+$data = FileDataLoader::getAttributes();
+
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
     if (count($data) == 0) {
-        echo "Categories do not exist";
+        echo "Attributs do not exist";
     } else {
         foreach ($data as $item) {
             # code...
-            echo $item['name'] . '<br>', $item['__typename'] . '<br>';
+            echo $item['id'] . '<br>', $item['__typename'] . '<br>';
         }
     }
 

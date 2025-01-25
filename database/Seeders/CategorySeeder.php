@@ -14,9 +14,9 @@ class CategorySeeder implements FixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $data = FileDataLoader::getCategories();
+        $categories = FileDataLoader::getCategories();
 
-        foreach ($data as $item) {
+        foreach ($categories as $item) {
             $category = new Category();
             $category->setName($item['name']);
             $category->setTypeName($item['__typename']);

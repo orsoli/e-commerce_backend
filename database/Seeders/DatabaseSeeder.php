@@ -1,9 +1,14 @@
 <?php
 
 use Doctrine\Common\DataFixtures\Loader;
-use Database\Seeders\CategorySeeder;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\CurrencySeeder;
+use Database\Seeders\PriceSeeder;
+use Database\Seeders\AttributeSeeder;
+
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -14,6 +19,9 @@ $entityManager = require_once __DIR__ . '/../../seeder-config.php';
 
 $loader = new Loader();
 $loader->addFixture(new CategorySeeder());
+$loader->addFixture(new CurrencySeeder());
+$loader->addFixture(new PriceSeeder());
+$loader->addFixture(new AttributeSeeder());
 
 
 $executor = new ORMExecutor($entityManager, new ORMPurger());

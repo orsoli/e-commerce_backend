@@ -19,7 +19,8 @@ class CurrencyPrice
     #[GeneratedValue]
     private $id;
 
-    #[Column(type: 'decimal', precision: 8, scale: 2, options: ['unsigned' => true])]
+    #[ManyToOne(targetEntity: 'Price')]
+    #[JoinColumn(name: 'price', referencedColumnName: 'amount')]
     private $price;
 
     #[ManyToOne(targetEntity: 'Currency')]
