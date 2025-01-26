@@ -83,7 +83,7 @@ class Product
         return $this->description;
     }
 
-    public function setPrice(?float $price): void
+    public function setPrice(?Price $price): void
     {
         $this->price = $price;
     }

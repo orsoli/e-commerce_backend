@@ -143,4 +143,36 @@ class FileDataLoader
         return [];
     }
 
+    // Get gallery
+    public static function getGallery() {
+        
+    $products = Self::getProducts();
+
+    if (count($products) > 0) {
+
+        $galleries = []; // Store galleries for each product
+
+        foreach ($products as $product) {
+            $productId = $product['id']; // Get product id
+
+            // Initialize the gallery for this product
+            if (!isset($galleries[$productId])) {
+                $galleries[$productId] = [];
+            }
+
+            foreach ($product['gallery'] as $url) {
+                // Check if URL already exists for this product's gallery
+                if (!in_array($url, $galleries[$productId])) {
+                    $galleries[$productId][] = $url; // Add unique URL to gallery
+                }
+            }
+        }
+
+        return $galleries;
+    }
+
+    return [];
+}
+
+
 }

@@ -26,9 +26,6 @@ class Gallery
     #[Column(type: 'text')]
     private $url;
 
-    #[Column(name: '__typename', type: 'string', length: 255)]
-    private $typeName;
-
     #[Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'], nullable: false)]
     private $createdAt;
 
@@ -60,16 +57,6 @@ class Gallery
     public function getUrl(): string
     {
         return $this->url;
-    }
-
-    public function setTypeName(string $typeName): void
-    {
-        $this->typeName = $typeName;
-    }
-
-    public function getTypeName(): string
-    {
-        return $this->typeName;
     }
 
     public function setCreatedAt(\DateTime $createdAt): void
