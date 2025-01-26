@@ -3,25 +3,15 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Helper\FileDataLoader;
 
-$data = FileDataLoader::getProducts();
+$data = FileDataLoader::getAttributeProduct();
 
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
-
-    if (count($data) == 0) {
-        echo "Attributs do not exist";
-    } else {
-        foreach ($data as $item => $value) {
-            foreach ($value['prices'] as $key => $value) {
-                echo "<pre>";
-                print_r($value['amount']);
-                echo "</pre>";
-                # code...
-            }
-            // echo $value['prices'] . '<br>';
-        }
-    }
+foreach ($data as $value) {
+    # code...
+    echo $value['attribute_id'] . '<br>';
+    // echo "<pre>";
+    // print_r($value);
+    // echo "</pre>";
+}
 
 
 

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250125160731 extends AbstractMigration
+final class Version20250126184557 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20250125160731 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE attribute_product (id BIGINT UNSIGNED NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, product_id VARCHAR(255) NOT NULL, attribute_id VARCHAR(255) NOT NULL, INDEX IDX_58D65D694584665A (product_id), INDEX IDX_58D65D69B6E62EFA (attribute_id), PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE attribute_product (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, product_id VARCHAR(255) NOT NULL, attribute_id VARCHAR(255) NOT NULL, INDEX IDX_58D65D694584665A (product_id), INDEX IDX_58D65D69B6E62EFA (attribute_id), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE attributes (id VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, UNIQUE INDEX UNIQ_319B9E705E237E06 (name), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE categories (name VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(name))');
         $this->addSql('CREATE TABLE currency (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, label VARCHAR(255) NOT NULL, symbol VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(id))');

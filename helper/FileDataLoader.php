@@ -146,33 +146,60 @@ class FileDataLoader
     // Get gallery
     public static function getGallery() {
         
-    $products = Self::getProducts();
+        $products = Self::getProducts();
 
-    if (count($products) > 0) {
+        if (count($products) > 0) {
 
-        $galleries = []; // Store galleries for each product
+            $galleries = []; // Store galleries for each product
 
-        foreach ($products as $product) {
-            $productId = $product['id']; // Get product id
+            foreach ($products as $product) {
+                $productId = $product['id']; // Get product id
 
-            // Initialize the gallery for this product
-            if (!isset($galleries[$productId])) {
-                $galleries[$productId] = [];
-            }
+                // Initialize the gallery for this product
+                if (!isset($galleries[$productId])) {
+                    $galleries[$productId] = [];
+                }
 
-            foreach ($product['gallery'] as $url) {
-                // Check if URL already exists for this product's gallery
-                if (!in_array($url, $galleries[$productId])) {
-                    $galleries[$productId][] = $url; // Add unique URL to gallery
+                foreach ($product['gallery'] as $url) {
+                    // Check if URL already exists for this product's gallery
+                    if (!in_array($url, $galleries[$productId])) {
+                        $galleries[$productId][] = $url; // Add unique URL to gallery
+                    }
                 }
             }
-        }
 
-        return $galleries;
+            return $galleries;
     }
 
     return [];
-}
+    }
+
+    // Get Attribute=>Product Id`s
+   public static function getAttributeProduct() {
+        $products = Self::getProducts();
+
+        if (count($products) > 0) {
+            
+            $attributeProduct = []; // Store product_id => attribute_id pairs
+
+            foreach ($products as $product) {
+                $productId = $product['id'];
+
+                foreach ($product['attributes'] as $attribute) {
+                    // Add each product_id => attribute_id pair to the array
+                    $attributeProduct[] = [
+                        'product_id'=>$productId,
+                        'attribute_id' => $attribute['id']
+                        ];
+                }
+            }
+
+            return $attributeProduct;
+        }
+
+        return [];
+    }
+
 
 
 }

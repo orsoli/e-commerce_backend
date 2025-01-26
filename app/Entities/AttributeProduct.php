@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -14,7 +15,8 @@ use Doctrine\ORM\Mapping\Table;
 class AttributeProduct
 {
     #[Id]
-    #[Column(type: 'bigint', nullable: false, options: ['unsigned'=>true])]
+    #[Column(type: 'bigint', nullable: false, options: ['unsigned' => true])]
+    #[GeneratedValue]
     private $id;
 
     #[ManyToOne(targetEntity: 'Product')]
@@ -41,22 +43,22 @@ class AttributeProduct
         return $this->id;
     }
 
-    public function setProduct($product): void
+    public function setProduct(?Product $product): void
     {
         $this->product = $product;
     }
 
-    public function getProduct()
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    public function setAttribute($attribute): void
+    public function setAttribute(?Attribute $attribute): void
     {
         $this->attribute = $attribute;
     }
 
-    public function getAttribute()
+    public function getAttribute(): ?Attribute
     {
         return $this->attribute;
     }

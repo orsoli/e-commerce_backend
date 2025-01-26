@@ -88,7 +88,7 @@ class Product
         $this->price = $price;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?Price
     {
         return $this->price;
     }
