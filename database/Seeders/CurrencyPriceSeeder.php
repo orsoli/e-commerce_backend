@@ -4,27 +4,37 @@ namespace Database\Seeders;
 
 require_once __DIR__ .'/../../vendor/autoload.php';
 
-use App\Entities\Category;
+use App\Entities\CurrencyPrice;
+use App\Entities\Currency;
+use App\Entities\Price;
 use DateTime;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Helper\FileDataLoader;
 
-class CategorySeeder implements FixtureInterface
+class CurrencyPriceSeeder implements FixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $categories = FileDataLoader::getCategories();
+        $currenciesPrices = FileDataLoader::getCurrencyPrice();
 
-        foreach ($categories as $item) {
-            $category = new Category();
-            $category->setName($item['name']);
-            $category->setTypeName($item['__typename']);
-            $category->setCreatedAt(new DateTime('now'));
+        foreach ($currenciesPrices as $item) {
+
+            $price = $manager->getRepository(Price::class)->findOneBy(['amount' => $item['price_amount']]);
+
             
-            $manager->persist($category);
-        }
+            $currency = $manager->getRepository(Currency::class)->findOneBy(['label' => $item['currency_label']]);
 
+            $currencyPrice = new CurrencyPrice();
+            $currencyPrice->setPrice($price);
+            $currencyPrice->setCurrency($currency);
+            $currencyPrice->setTypeName('Currency_Price');
+            $currencyPrice->setCreatedAt(new DateTime('now'));
+            
+            
+            $manager->persist($currencyPrice);
+        }
+        
         $manager->flush();
     }
 }

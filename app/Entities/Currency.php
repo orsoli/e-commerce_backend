@@ -4,7 +4,6 @@ namespace App\Entities;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
 
@@ -13,11 +12,7 @@ use Doctrine\ORM\Mapping\Table;
 class Currency
 {
     #[Id]
-    #[Column(type: 'bigint', nullable: false, options: ['unsigned' => true])]
-    #[GeneratedValue]
-    private $id;
-
-    #[Column(type: 'string', length: 255)]
+    #[Column(type: 'string', length: 255, options: ['primary'=>true])]
     private $label;
 
     #[Column(type: 'string', length: 255)]
@@ -28,16 +23,6 @@ class Currency
 
     #[Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP', 'onUpdate' => 'CURRENT_TIMESTAMP'], nullable: false)]
     private $createdAt;
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function setLabel(string $label): void
     {

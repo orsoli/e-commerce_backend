@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping\Table;
 class CurrencyPrice
 {
     #[Id]
-    #[Column(type: 'bigint', options: ['unsigned' => true, 'primeary'=>true])]
+    #[Column(type: 'bigint', options: ['unsigned' => true, 'primary'=>true])]
     #[GeneratedValue]
     private $id;
 
@@ -24,7 +24,7 @@ class CurrencyPrice
     private $price;
 
     #[ManyToOne(targetEntity: 'Currency')]
-    #[JoinColumn(name: 'currency_id', referencedColumnName: 'id')]
+    #[JoinColumn(name: 'currency', referencedColumnName: 'label')]
     private $currency;
 
     #[Column(name: '__typename', type: 'string', length: 255)]
@@ -43,17 +43,17 @@ class CurrencyPrice
         return $this->id;
     }
 
-    public function setPrice(float $price): void
+    public function setPrice(?Price $price): void
     {
         $this->price = $price;
     }
 
-    public function getPrice(): float
+    public function getPrice(): ?Price
     {
         return $this->price;
     }
 
-    public function setCurrency(Currency $currency): void
+    public function setCurrency(?Currency $currency): void
     {
         $this->currency = $currency;
     }

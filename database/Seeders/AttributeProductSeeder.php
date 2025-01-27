@@ -16,9 +16,9 @@ class AttributeProductSeeder implements FixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $attributeProduct = FileDataLoader::getAttributeProduct();
+        $attributesProducts = FileDataLoader::getAttributeProduct();
 
-        foreach ($attributeProduct as $item) {
+        foreach ($attributesProducts as $item) {
 
             $product = $manager->getRepository(Product::class)->findOneBy(['id' => $item['product_id']]);
             $attribute = $manager->getRepository(Attribute::class)->findOneBy(['id' => $item['attribute_id']]);

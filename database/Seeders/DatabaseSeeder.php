@@ -12,6 +12,7 @@ use Database\Seeders\ItemSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\GallerySeeder;
 use Database\Seeders\AttributeProductSeeder;
+use Database\Seeders\CurrencyPriceSeeder;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -29,6 +30,7 @@ $loader->addFixture(new ItemSeeder());
 $loader->addFixture(new ProductSeeder());
 $loader->addFixture(new GallerySeeder());
 $loader->addFixture(new AttributeProductSeeder());
+$loader->addFixture(new CurrencyPriceSeeder());
 
 
 $executor = new ORMExecutor($entityManager, new ORMPurger());

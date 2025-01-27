@@ -200,6 +200,34 @@ class FileDataLoader
         return [];
     }
 
+    // Get Currency=>Price Id`s
+   public static function getCurrencyPrice() {
+
+        $prices = Self::getPrices();
+
+        if (count($prices) > 0) {
+            
+            $currencyprice = []; // Store currency_label => price_amount pairs
+
+            foreach ($prices as $price) {
+                
+                $priceAmount = $price['amount'];
+                $currencyLabel = $price['currency']['label'];
+
+                // Add each currency_label => price_amount pair to the array
+                $currencyprice[] = [
+                    'price_amount'=>$priceAmount,
+                    'currency_label' => $currencyLabel
+                ];
+                    
+            }
+
+            return $currencyprice;
+        }
+
+        return [];
+    }
+
 
 
 }

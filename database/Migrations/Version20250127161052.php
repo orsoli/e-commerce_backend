@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250126184557 extends AbstractMigration
+final class Version20250127161052 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -23,8 +23,8 @@ final class Version20250126184557 extends AbstractMigration
         $this->addSql('CREATE TABLE attribute_product (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, product_id VARCHAR(255) NOT NULL, attribute_id VARCHAR(255) NOT NULL, INDEX IDX_58D65D694584665A (product_id), INDEX IDX_58D65D69B6E62EFA (attribute_id), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE attributes (id VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, UNIQUE INDEX UNIQ_319B9E705E237E06 (name), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE categories (name VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(name))');
-        $this->addSql('CREATE TABLE currency (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, label VARCHAR(255) NOT NULL, symbol VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE currency_price (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, price NUMERIC(8, 2) UNSIGNED DEFAULT NULL, currency_id BIGINT UNSIGNED DEFAULT NULL, INDEX IDX_9D2A20BFCAC822D9 (price), INDEX IDX_9D2A20BF38248176 (currency_id), PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE currency (label VARCHAR(255) NOT NULL, symbol VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(label))');
+        $this->addSql('CREATE TABLE currency_price (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, price NUMERIC(8, 2) UNSIGNED DEFAULT NULL, currency VARCHAR(255) DEFAULT NULL, INDEX IDX_9D2A20BFCAC822D9 (price), INDEX IDX_9D2A20BF6956883F (currency), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE gallery (id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, url LONGTEXT NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, product_id VARCHAR(255) NOT NULL, INDEX IDX_472B783A4584665A (product_id), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE items (id VARCHAR(255) NOT NULL, displayValue VARCHAR(255) NOT NULL, value VARCHAR(255) NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, attribute_id VARCHAR(255) DEFAULT NULL, INDEX IDX_E11EE94DB6E62EFA (attribute_id), PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE prices (amount NUMERIC(8, 2) UNSIGNED NOT NULL, __typename VARCHAR(255) NOT NULL, createdAt DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY(amount))');
@@ -32,7 +32,7 @@ final class Version20250126184557 extends AbstractMigration
         $this->addSql('ALTER TABLE attribute_product ADD CONSTRAINT FK_58D65D694584665A FOREIGN KEY (product_id) REFERENCES products (id)');
         $this->addSql('ALTER TABLE attribute_product ADD CONSTRAINT FK_58D65D69B6E62EFA FOREIGN KEY (attribute_id) REFERENCES attributes (id)');
         $this->addSql('ALTER TABLE currency_price ADD CONSTRAINT FK_9D2A20BFCAC822D9 FOREIGN KEY (price) REFERENCES prices (amount)');
-        $this->addSql('ALTER TABLE currency_price ADD CONSTRAINT FK_9D2A20BF38248176 FOREIGN KEY (currency_id) REFERENCES currency (id)');
+        $this->addSql('ALTER TABLE currency_price ADD CONSTRAINT FK_9D2A20BF6956883F FOREIGN KEY (currency) REFERENCES currency (label)');
         $this->addSql('ALTER TABLE gallery ADD CONSTRAINT FK_472B783A4584665A FOREIGN KEY (product_id) REFERENCES products (id)');
         $this->addSql('ALTER TABLE items ADD CONSTRAINT FK_E11EE94DB6E62EFA FOREIGN KEY (attribute_id) REFERENCES attributes (id)');
         $this->addSql('ALTER TABLE products ADD CONSTRAINT FK_B3BA5A5ACAC822D9 FOREIGN KEY (price) REFERENCES prices (amount)');
@@ -45,7 +45,7 @@ final class Version20250126184557 extends AbstractMigration
         $this->addSql('ALTER TABLE attribute_product DROP FOREIGN KEY FK_58D65D694584665A');
         $this->addSql('ALTER TABLE attribute_product DROP FOREIGN KEY FK_58D65D69B6E62EFA');
         $this->addSql('ALTER TABLE currency_price DROP FOREIGN KEY FK_9D2A20BFCAC822D9');
-        $this->addSql('ALTER TABLE currency_price DROP FOREIGN KEY FK_9D2A20BF38248176');
+        $this->addSql('ALTER TABLE currency_price DROP FOREIGN KEY FK_9D2A20BF6956883F');
         $this->addSql('ALTER TABLE gallery DROP FOREIGN KEY FK_472B783A4584665A');
         $this->addSql('ALTER TABLE items DROP FOREIGN KEY FK_E11EE94DB6E62EFA');
         $this->addSql('ALTER TABLE products DROP FOREIGN KEY FK_B3BA5A5ACAC822D9');

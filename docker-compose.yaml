@@ -26,6 +26,7 @@ services:
       MYSQL_PASSWORD: your_password
     volumes:
       - ./mysql-data:/var/lib/mysql
+      - ./mysql.cnf:/etc/mysql/mysql.cnf
 
   # phpMyAdmin service
   phpmyadmin:
