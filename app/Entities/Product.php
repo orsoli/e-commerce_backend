@@ -16,23 +16,19 @@ class Product
     #[Id]
     #[Column(type: 'string', length: 255, nullable: false)]
     private $id;
+    
+    #[ManyToOne(targetEntity: 'Category')]
+    #[JoinColumn(name: 'category_name', referencedColumnName: 'name', nullable: false)]
+    private $category;
 
-    #[Column(type: 'string', length: 255, unique: true)]
+    #[Column(type: 'string', length: 255)]
     private $name;
 
-    #[Column(type: 'boolean')]
+    #[Column(name: 'in_stock', type: 'boolean')]
     private $inStock;
 
     #[Column(type: 'text', nullable: true)]
     private $description;
-
-    #[ManyToOne(targetEntity: 'Price')]
-    #[JoinColumn(name: 'price', referencedColumnName: 'amount', nullable: false, options: ['unsigned' => true])]
-    private $price;
-
-    #[ManyToOne(targetEntity: 'Category')]
-    #[JoinColumn(name: 'category', referencedColumnName: 'name', nullable: false)]
-    private $category;
 
     #[Column(type: 'string', length: 255, nullable: true)]
     private $brand;
@@ -53,6 +49,16 @@ class Product
         return $this->id;
     }
 
+    public function setCategory(?Category $category): void
+    {
+        $this->category = $category;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+    
     public function setName(string $name): void
     {
         $this->name = $name;
@@ -83,25 +89,6 @@ class Product
         return $this->description;
     }
 
-    public function setPrice(?Price $price): void
-    {
-        $this->price = $price;
-    }
-
-    public function getPrice(): ?Price
-    {
-        return $this->price;
-    }
-
-    public function setCategory(?Category $category): void
-    {
-        $this->category = $category;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
 
     public function setBrand(?string $brand): void
     {

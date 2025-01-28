@@ -5,21 +5,27 @@ namespace App\Entities;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
-#[Table(name: 'attributes')]
-class Attribute
+#[Table(name: 'product_attributes')]
+class ProductAttribute
 {
     #[Id]
     #[Column(type: 'string', length: 255)]
     private $id;
 
+    #[ManyToOne(targetEntity: 'Product')]
+    #[JoinColumn(name: 'product_id', referencedColumName: 'id', nullable: false )]
+    private $product;
+
     #[Column(type: 'string',length:255, unique: true)]
     private $name;
 
-    #[Column(type: 'string', length:255)]
-    private $type;
+    #[Column(name:'attribute_type', type: 'string', length:255)]
+    private $attributeType;
 
     #[Column(name: '__typename', type: 'string', length: 255)]
     private $typeName;
@@ -37,6 +43,16 @@ class Attribute
         return $this->id;
     }
 
+    public function setProduct(?Product $product): void
+    {
+         $this->product = $product;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
     public function setName(string $name): void
     {
         $this->name = $name;
@@ -47,14 +63,14 @@ class Attribute
         return $this->name;
     }
 
-    public function setType(string $type): void
+    public function setAttributeType(string $type): void
     {
-        $this->type = $type;
+        $this->attributeType = $type;
     }
 
-    public function getType(): ?string
+    public function getAttributeType(): ?string
     {
-        return $this->type;
+        return $this->attributeType;
     }
 
     public function setTypeName(string $typeName): void

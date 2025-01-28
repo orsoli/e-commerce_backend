@@ -1,18 +1,17 @@
 <?php
 
+use App\Entities\ProductImage;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\CurrencySeeder;
-use Database\Seeders\PriceSeeder;
-use Database\Seeders\AttributeSeeder;
-use Database\Seeders\ItemSeeder;
 use Database\Seeders\ProductSeeder;
-use Database\Seeders\GallerySeeder;
-use Database\Seeders\AttributeProductSeeder;
-use Database\Seeders\CurrencyPriceSeeder;
+use Database\Seeders\ProductPriceSeeder;
+use Database\Seeders\ProductAttributeSeeder;
+use Database\Seeders\AttributeItemSeeder;
+use Database\Seeders\ProductImageSeeder;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -24,13 +23,11 @@ $entityManager = require_once __DIR__ . '/../../seeder-config.php';
 $loader = new Loader();
 $loader->addFixture(new CategorySeeder());
 $loader->addFixture(new CurrencySeeder());
-$loader->addFixture(new PriceSeeder());
-$loader->addFixture(new AttributeSeeder());
-$loader->addFixture(new ItemSeeder());
 $loader->addFixture(new ProductSeeder());
-$loader->addFixture(new GallerySeeder());
-$loader->addFixture(new AttributeProductSeeder());
-$loader->addFixture(new CurrencyPriceSeeder());
+$loader->addFixture(new ProductPriceSeeder());
+$loader->addFixture(new ProductAttributeSeeder());
+$loader->addFixture(new AttributeItemSeeder());
+$loader->addFixture(new ProductImageSeeder());
 
 
 $executor = new ORMExecutor($entityManager, new ORMPurger());

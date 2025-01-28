@@ -2,6 +2,7 @@
 
 namespace Helper;
 
+use Doctrine\DBAL\Types\StringType;
 
 class FileDataLoader
 {
@@ -48,25 +49,34 @@ class FileDataLoader
 
 
     // Get prices
-    public static function getPrices(){
+    public static function getProductPrices(){
 
          $products = Self::getProducts();
 
          // Check if 'Product' exists in the data
          if (count($products) > 0) {
 
-            $prices = []; // Save prices of profucts
+            $productPrices = []; // Save prices of profucts
 
-            foreach ($products as $productPrices) {
-                foreach ($productPrices['prices'] as $item) {
-                    $uniqueKey = (string)$item['amount'];
-                    if (!array_key_exists($uniqueKey, $prices)) {
-                        $prices[$uniqueKey] = $item;
-                    };
+            foreach ($products as $product) {
+
+                $productId = $product['id'];
+
+                foreach ($product['prices'] as $price) {
+                    $productPrices[] = 
+                    [
+                        'product_id'=>$productId,
+                        'product_prices'=>
+                        [
+                            'amount' => $price['amount'],
+                            'currency' => (object) $price['currency'],
+                            '__typename' => $price['__typename']
+                        ]
+                    ];
                 };
             };
             
-            return $prices;
+            return $productPrices;
         }
 
         return [];
@@ -74,18 +84,18 @@ class FileDataLoader
 
     // Get currencies
     public static function getCurrencies() {
-        $prices = Self::getPrices();
+        
+        $productPrices = Self::getProductPrices();
         
         $currencies = []; // Store Currencies
 
         // Check if 'prices' exists
-        if (count($prices) > 0) {
-            foreach ($prices as $price) {
-                $currency = $price['currency']; // Get currency
-                if (!in_array($currency, $currencies)) {
-                    $currencies[] = $currency; // Add currency in array
-                }
+        if (count($productPrices) > 0) {
+            foreach ($productPrices as $price) {
+
+                $currencies[] = $price['product_prices']['currency']; // Add currency in array
             }
+            
             return $currencies;
         }
 
@@ -93,141 +103,99 @@ class FileDataLoader
     }
 
     // Get attributes
-    public static function getAttributes(){
+    public static function getProductAttributes(){
 
          $products = Self::getProducts();
 
          // Check if 'Product' exists in the data
          if (count($products) > 0) {
 
-            $attributes = []; // Store attributes of products
+            $productAttributes = []; // Store attributes of products
 
             foreach ($products as $product) {
+
                 foreach ($product['attributes'] as $attribute) {
-                    $uniqueKey = $attribute['id'];
-                    if (!array_key_exists($uniqueKey, $attributes)) {
-                        $attributes[$uniqueKey] = $attribute;
-                    };
-                };
-            };
-            
-            return $attributes;
-        }
-
-        return [];
-    }
-
-    // Get items
-    public static function getItems() {
-
-        $attributes = Self::getAttributes();
-
-        // Check if 'attributes' exists
-        if (count($attributes) > 0) {
-            
-            $items = []; // Store items of attributes
-
-            foreach ($attributes as $attribute) {
-                foreach ($attribute['items'] as $singleItem) {
-                    $item = $singleItem; // Get item
-                    $item['attribute_id'] = $attribute['id']; // Get attribute id
-                    if (!in_array($item, $items)) {
-                        $items[] = $item; // Add item in array
-                    }
+                        $productAttributes[] =
+                        [
+                            'id' => $attribute['id'],
+                            'product_id'=>$product['id'],
+                            'items' => $attribute['items'],
+                            'name' => $attribute['name'],
+                            'attribute_type' => $attribute['type'],
+                            '__typename' => $attribute['__typename']
+                        ];
                 }
             }
-
-            return $items;
+            
+            return $productAttributes;
         }
 
         return [];
     }
 
+    public static function getAttributeItems() {
+
+    $productAttributes = Self::getProductAttributes();
+
+    // Check if 'attributes' exists
+    if (count($productAttributes) > 0) {
+        
+        $attributeItems = []; // Store items of attributes
+        $itemIds = []; // Array to track unique item IDs
+
+        foreach ($productAttributes as $attribute) {
+
+            $attributeId = $attribute['id'];
+
+            foreach ($attribute['items'] as $item) {
+
+                if (!in_array($item['id'], $itemIds)) { // Check if item ID is not already in itemIds
+                    $attributeItems[] = [
+                        'attribute_id' => $attributeId,
+                        'id' => $item['id'],
+                        'display_value' => $item['displayValue'],
+                        'value' => $item['value'],
+                        '__typename' => $item['__typename'],
+                    ];
+
+                    $itemIds[] = $item['id']; // Add the item ID to itemIds
+                }
+            }
+        }
+
+        return $attributeItems;
+    }
+
+    return [];
+}
+
+
     // Get gallery
-    public static function getGallery() {
+    public static function getProductImages() {
         
         $products = Self::getProducts();
 
         if (count($products) > 0) {
 
-            $galleries = []; // Store galleries for each product
+            $gallery = []; // Store images for each product
 
             foreach ($products as $product) {
+                
                 $productId = $product['id']; // Get product id
 
-                // Initialize the gallery for this product
-                if (!isset($galleries[$productId])) {
-                    $galleries[$productId] = [];
-                }
-
                 foreach ($product['gallery'] as $url) {
-                    // Check if URL already exists for this product's gallery
-                    if (!in_array($url, $galleries[$productId])) {
-                        $galleries[$productId][] = $url; // Add unique URL to gallery
-                    }
+
+                    $gallery[] =
+                    [
+                        'product_id' => $productId,
+                        'url' => $url
+                    ];
                 }
             }
 
-            return $galleries;
+            return $gallery;
     }
 
     return [];
     }
-
-    // Get Attribute=>Product Id`s
-   public static function getAttributeProduct() {
-        $products = Self::getProducts();
-
-        if (count($products) > 0) {
-            
-            $attributeProduct = []; // Store product_id => attribute_id pairs
-
-            foreach ($products as $product) {
-                $productId = $product['id'];
-
-                foreach ($product['attributes'] as $attribute) {
-                    // Add each product_id => attribute_id pair to the array
-                    $attributeProduct[] = [
-                        'product_id'=>$productId,
-                        'attribute_id' => $attribute['id']
-                        ];
-                }
-            }
-
-            return $attributeProduct;
-        }
-
-        return [];
-    }
-
-    // Get Currency=>Price Id`s
-   public static function getCurrencyPrice() {
-
-        $prices = Self::getPrices();
-
-        if (count($prices) > 0) {
-            
-            $currencyprice = []; // Store currency_label => price_amount pairs
-
-            foreach ($prices as $price) {
-                
-                $priceAmount = $price['amount'];
-                $currencyLabel = $price['currency']['label'];
-
-                // Add each currency_label => price_amount pair to the array
-                $currencyprice[] = [
-                    'price_amount'=>$priceAmount,
-                    'currency_label' => $currencyLabel
-                ];
-                    
-            }
-
-            return $currencyprice;
-        }
-
-        return [];
-    }
-
-
-
 }

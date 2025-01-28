@@ -10,16 +10,16 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
-#[Table(name: 'items')]
-class Item
+#[Table(name: 'attribute_items')]
+class AttributeItem
 {
     #[Id]
     #[Column(type: 'string', length: 255)]
     private $id;
 
-    #[ManyToOne(targetEntity: 'Attribute')]
+    #[ManyToOne(targetEntity: 'ProductAttribute')]
     #[JoinColumn(name: 'attribute_id', referencedColumnName: 'id')]
-    private $attribute;
+    private $attributeId;
 
     #[Column(type: 'string', length: 255)]
     private $displayValue;
@@ -43,14 +43,14 @@ class Item
         return $this->id;
     }
 
-    public function setAttribute(Attribute $attribute): void
+    public function setAttribute(?ProductAttribute $attributeId): void
     {
-        $this->attribute = $attribute;
+        $this->attributeId = $attributeId;
     }
 
-    public function getAttribute(): ?Attribute
+    public function getAttribute(): ?ProductAttribute
     {
-        return $this->attribute;
+        return $this->attributeId;
     }
 
     public function setDisplayValue(string $displayValue): void

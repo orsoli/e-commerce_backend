@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
-#[Table(name: 'gallery')]
-class Gallery
+#[Table(name: 'product_images')]
+class ProductImage
 {
     #[Id]
     #[Column(type: 'bigint', options: ['unsigned' => true, 'primary'=>true])]

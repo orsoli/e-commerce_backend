@@ -5,6 +5,7 @@ namespace App\Entities;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
@@ -12,7 +13,11 @@ use Doctrine\ORM\Mapping\Table;
 class Category
 {
     #[Id]
-    #[Column(type: 'string', length: 255, nullable: false)]
+    #[Column(type: 'bigint', options: ['unsigned' => true, 'primary'=>true])]
+    #[GeneratedValue]
+    private $id;
+
+    #[Column(type: 'string', length: 255, nullable: false, unique: true)]
     private $name;
 
     #[Column(name: '__typename', type: 'string', length: 255)]
@@ -20,6 +25,16 @@ class Category
 
     #[Column(type: 'datetime', name: 'created_at', options: ['default' => 'CURRENT_TIMESTAMP', 'onUpdate' => 'CURRENT_TIMESTAMP'])]
     private $createdAt;
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function setName(string $name): void
     {

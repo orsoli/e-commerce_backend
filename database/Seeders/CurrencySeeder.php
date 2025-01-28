@@ -18,9 +18,9 @@ class CurrencySeeder implements FixtureInterface
 
         foreach ($currencies as $item) {
             $currency = new Currency();
-            $currency->setLabel($item['label']);
-            $currency->setSymbol($item['symbol']);
-            $currency->setTypeName($item['__typename']);
+            $currency->setLabel($item->label);
+            $currency->setSymbol($item->symbol);
+            $currency->setTypeName($item->__typename);
             $currency->setCreatedAt(new DateTime('now'));
             
             $manager->persist($currency);

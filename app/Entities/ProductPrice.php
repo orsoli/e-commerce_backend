@@ -2,20 +2,23 @@
 
 namespace App\Entities;
 
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
-#[Table(name: 'attribute_product')]
-class AttributeProduct
+#[Table(name: 'product_prices', uniqueConstraints: [
+    new UniqueConstraint(name: 'unique_product_currency', columns: ['product_id', 'currency_id'])
+])]
+class ProductPrice
 {
     #[Id]
-    #[Column(type: 'bigint', nullable: false, options: ['unsigned' => true])]
+    #[Column(type: 'id', options:['unsigned' => true, 'primary' => true])]
     #[GeneratedValue]
     private $id;
 
@@ -23,11 +26,14 @@ class AttributeProduct
     #[JoinColumn(name: 'product_id', referencedColumnName: 'id', nullable: false)]
     private $product;
 
-    #[ManyToOne(targetEntity: 'Attribute')]
-    #[JoinColumn(name: 'attribute_id', referencedColumnName: 'id', nullable: false)]
-    private $attribute;
+    #[ManyToOne(targetEntity: 'Currency')]
+    #[JoinColumn(name: 'currency_label', referencedColumnName: 'label', nullable: false)]
+    private $currencyLabel;
+    
+    #[Column(type: 'decimal', precision: 8, scale: 2, options: ['unsigned' => true])]
+    private $amount;
 
-    #[Column(name: '__typename', type: 'string', length: 255)]
+    #[Column(name: '__typename', type: 'string', length: 255, nullable: false)]
     private $typeName;
 
     #[Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP', 'onUpdate' => 'CURRENT_TIMESTAMP'])]
@@ -48,19 +54,29 @@ class AttributeProduct
         $this->product = $product;
     }
 
-    public function getProduct(): ?Product
+    public function getProductId(): ?Product
     {
         return $this->product;
     }
 
-    public function setAttribute(?Attribute $attribute): void
+    public function setCurrency(?Currency $currencyLabel): void
     {
-        $this->attribute = $attribute;
+        $this->currencyLabel = $currencyLabel;
     }
 
-    public function getAttribute(): ?Attribute
+    public function getCurrencyId(): ?Currency
     {
-        return $this->attribute;
+        return $this->currencyLabel;
+    }
+
+    public function setAmount(float $amount): void
+    {
+        $this->amount = $amount;
+    }
+
+    public function getAmount(): ?float
+    {
+        return $this->amount;
     }
 
     public function setTypeName(string $typeName): void
@@ -83,4 +99,3 @@ class AttributeProduct
         return $this->createdAt;
     }
 }
-?>
