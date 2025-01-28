@@ -93,7 +93,7 @@ class FileDataLoader
         if (count($productPrices) > 0) {
             foreach ($productPrices as $price) {
 
-                $currencies[] = $price['product_prices']['currency']; // Add currency in array
+                if(!in_array($price['product_prices']['currency'], $currencies)) $currencies[] = $price['product_prices']['currency']; // Add currency in array
             }
             
             return $currencies;

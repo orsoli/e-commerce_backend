@@ -21,7 +21,8 @@
   "scripts": {
         "doctrine:migrate": "php vendor/bin/doctrine-migrations migrate",
         "doctrine:migrations-diff": "php vendor/bin/doctrine-migrations migrations:diff",
-        "doctrine:db-seed":"php Database/Seeders/DatabaseSeeder.php"
+        "doctrine:db-seed":"php Database/Seeders/DatabaseSeeder.php",
+        "doctrine:migrate-down-version":"php vendor/bin/doctrine-migrations execute --down"
     },
   "require-dev": {
     "doctrine/data-fixtures": "^2.0"

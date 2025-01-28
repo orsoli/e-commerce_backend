@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping\Table;
 class ProductPrice
 {
     #[Id]
-    #[Column(type: 'id', options:['unsigned' => true, 'primary' => true])]
+    #[Column(type: 'bigint', options:['unsigned' => true, 'primary' => true])]
     #[GeneratedValue]
     private $id;
 

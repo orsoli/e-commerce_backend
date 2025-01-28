@@ -18,7 +18,7 @@ class ProductAttribute
     private $id;
 
     #[ManyToOne(targetEntity: 'Product')]
-    #[JoinColumn(name: 'product_id', referencedColumName: 'id', nullable: false )]
+    #[JoinColumn(name: 'product_id', referencedColumnName: 'id', nullable: false )]
     private $product;
 
     #[Column(type: 'string',length:255, unique: true)]
