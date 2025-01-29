@@ -1,6 +1,5 @@
 <?php
 
-use App\Entities\ProductImage;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -32,6 +31,5 @@ $loader->addFixture(new ProductImageSeeder());
 
 $executor = new ORMExecutor($entityManager, new ORMPurger());
 $executor->execute($loader->getFixtures());
-
 
 echo "\033[32m✔ Data has been successfully seeded into the database!\033[0m\n";

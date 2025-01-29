@@ -39,7 +39,7 @@ class ProductImage
         return $this->id;
     }
 
-    public function setProduct(Product $product): void
+    public function setProduct(?Product $product): void
     {
         $this->product = $product;
     }

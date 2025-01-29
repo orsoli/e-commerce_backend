@@ -26,5 +26,6 @@ class CategorySeeder implements FixtureInterface
         }
 
         $manager->flush();
+
     }
 }

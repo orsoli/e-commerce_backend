@@ -106,15 +106,27 @@ class FileDataLoader
     public static function getProductAttributes(){
 
          $products = Self::getProducts();
-
+         
          // Check if 'Product' exists in the data
          if (count($products) > 0) {
-
-            $productAttributes = []; // Store attributes of products
+             
+             $productAttributes = []; // Store attributes of products
+             $attributeId = []; // Store attribute id
 
             foreach ($products as $product) {
 
                 foreach ($product['attributes'] as $attribute) {
+
+                    foreach ($attribute['items'] as $item) {
+
+                        if ($attribute['id'] === 'Size' && preg_match('/^\d+$/', $item['id'])){
+
+                            $attribute['id'] = 'size_numeric';
+                        }
+                    }
+
+                    if(!in_array($attribute['id'], $attributeId)){
+                        
                         $productAttributes[] =
                         [
                             'id' => $attribute['id'],
@@ -124,6 +136,9 @@ class FileDataLoader
                             'attribute_type' => $attribute['type'],
                             '__typename' => $attribute['__typename']
                         ];
+
+                        $attributeId[] = $attribute['id'];
+                    }
                 }
             }
             

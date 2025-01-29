@@ -36,5 +36,6 @@ class ProductPriceSeeder implements FixtureInterface
         }
 
         $manager->flush();
+
     }
 }

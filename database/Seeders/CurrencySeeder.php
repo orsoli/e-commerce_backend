@@ -27,5 +27,6 @@ class CurrencySeeder implements FixtureInterface
         }
 
         $manager->flush();
+
     }
 }

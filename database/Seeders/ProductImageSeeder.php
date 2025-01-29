@@ -22,14 +22,15 @@ class ProductImageSeeder implements FixtureInterface
             // Get product base on galleries
             $product = $manager->getRepository(Product::class)->findOneBy(['id' => $item['product_id']]);
 
-                $url = new ProductImage();
-                $url->setProduct($product);
-                $url->setUrl($item['url']);
-                $url->setCreatedAt(new DateTime('now'));
-                
-                $manager->persist($url);
+            $url = new ProductImage();
+            $url->setProduct($product);
+            $url->setUrl($item['url']);
+            $url->setCreatedAt(new DateTime('now'));
+            
+            $manager->persist($url);
         }
 
         $manager->flush();
+
     }
 }

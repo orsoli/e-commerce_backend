@@ -31,10 +31,11 @@ class ProductSeeder implements FixtureInterface
             $product->setBrand($value['brand']);
             $product->setTypeName($value['__typename']);
             $product->setCreatedAt(new DateTime('now'));
-            
+
             $manager->persist($product);
         }
 
         $manager->flush();
+
     }
 }

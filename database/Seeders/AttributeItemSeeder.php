@@ -25,7 +25,7 @@ class AttributeItemSeeder implements FixtureInterface
             $attributeItem->setId($item['id']);
             $attributeItem->setAttribute($attribute);
             $attributeItem->setValue($item['value']);
-            $attributeItem->setDisplayValue($item['displayValue']);
+            $attributeItem->setDisplayValue($item['display_value']);
             $attributeItem->setTypeName($item['__typename']);
             $attributeItem->setCreatedAt(new DateTime('now'));
             

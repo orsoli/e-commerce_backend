@@ -33,5 +33,6 @@ class ProductAttributeSeeder implements FixtureInterface
         }
 
         $manager->flush();
+
     }
 }
