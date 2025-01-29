@@ -14,14 +14,14 @@ use Doctrine\ORM\Mapping\Table;
 class ProductAttribute
 {
     #[Id]
-    #[Column(type: 'string', length: 255)]
+    #[Column(type: 'string', length: 255, options:['primary' => true])]
     private $id;
 
     #[ManyToOne(targetEntity: 'Product')]
     #[JoinColumn(name: 'product_id', referencedColumnName: 'id', nullable: false )]
     private $product;
 
-    #[Column(type: 'string',length:255, unique: true)]
+    #[Column(type: 'string',length:255)]
     private $name;
 
     #[Column(name:'attribute_type', type: 'string', length:255)]

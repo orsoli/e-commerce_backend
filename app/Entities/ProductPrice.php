@@ -27,8 +27,8 @@ class ProductPrice
     private $product;
 
     #[ManyToOne(targetEntity: 'Currency')]
-    #[JoinColumn(name: 'currency_label', referencedColumnName: 'label', nullable: false)]
-    private $currencyLabel;
+    #[JoinColumn(name: 'currency_id', referencedColumnName: 'id', nullable: false)]
+    private $currencyId;
     
     #[Column(type: 'decimal', precision: 8, scale: 2, options: ['unsigned' => true])]
     private $amount;
@@ -59,14 +59,14 @@ class ProductPrice
         return $this->product;
     }
 
-    public function setCurrency(?Currency $currencyLabel): void
+    public function setCurrency(?Currency $currencyId): void
     {
-        $this->currencyLabel = $currencyLabel;
+        $this->currencyId = $currencyId;
     }
 
     public function getCurrencyId(): ?Currency
     {
-        return $this->currencyLabel;
+        return $this->currencyId;
     }
 
     public function setAmount(float $amount): void

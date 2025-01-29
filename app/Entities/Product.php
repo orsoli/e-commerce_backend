@@ -18,7 +18,7 @@ class Product
     private $id;
     
     #[ManyToOne(targetEntity: 'Category')]
-    #[JoinColumn(name: 'category_name', referencedColumnName: 'name', nullable: false)]
+    #[JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false)]
     private $category;
 
     #[Column(type: 'string', length: 255)]

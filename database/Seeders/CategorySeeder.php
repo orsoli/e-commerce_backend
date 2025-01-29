@@ -22,10 +22,10 @@ class CategorySeeder implements FixtureInterface
             $category->setTypeName($item['__typename']);
             $category->setCreatedAt(new DateTime('now'));
             
+            
             $manager->persist($category);
         }
-
+        
         $manager->flush();
-
     }
 }

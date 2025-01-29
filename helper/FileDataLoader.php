@@ -121,7 +121,7 @@ class FileDataLoader
 
                         if ($attribute['id'] === 'Size' && preg_match('/^\d+$/', $item['id'])){
 
-                            $attribute['id'] = 'size_numeric';
+                            $attribute['id'] = 'numeric_size';
                         }
                     }
 
